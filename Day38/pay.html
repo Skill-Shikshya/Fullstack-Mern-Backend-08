@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pay with eSewa</title>
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    max-width: 400px;
+    margin: 80px auto;
+    text-align: center;
+  }
+  input {
+    padding: 8px;
+    font-size: 16px;
+    width: 150px;
+    margin-bottom: 16px;
+  }
+  button {
+    padding: 10px 24px;
+    font-size: 16px;
+    background: #60bb46; /* eSewa green */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #4e9e39;
+  }
+  button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+  }
+  #error {
+    color: #c0392b;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+  <h1>Checkout</h1>
+  <div>
+    <label for="amount">Amount (NPR)</label><br />
+    <input type="number" id="amount" value="100" min="1" />
+  </div>
+  <button id="pay-btn">Pay with eSewa</button>
+  <p id="error"></p>
+
+  <script>
+    // Point this at your backend
+    const API_BASE = 'http://localhost:5000';
+
+    async function payWithEsewa(amount) {
+      const transaction_uuid = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+      const res = await fetch(`${API_BASE}/api/payment/initiate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, transaction_uuid }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to initiate payment');
+      }
+
+      const { esewa_url, ...fields } = await res.json();
+
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = esewa_url;
+
+      Object.entries(fields).forEach(([name, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = String(value);
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+    }
+
+    const btn = document.getElementById('pay-btn');
+    const errorEl = document.getElementById('error');
+
+    btn.addEventListener('click', async () => {
+      errorEl.textContent = '';
+      const amount = document.getElementById('amount').value;
+
+      if (!amount || Number(amount) <= 0) {
+        errorEl.textContent = 'Enter a valid amount.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Redirecting...';
+
+      try {
+        await payWithEsewa(amount);
+      } catch (err) {
+        errorEl.textContent = err.message;
+        btn.disabled = false;
+        btn.textContent = 'Pay with eSewa';
+      }
+    });
+  </script>
+</body>
+</html>

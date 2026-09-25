@@ -1,0 +1,27 @@
+{
+  "name": "day38",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "tsc": "^2.0.4",
+    "tsx": "^4.23.15"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "typescript": "^7.0.2"
+  }
+}

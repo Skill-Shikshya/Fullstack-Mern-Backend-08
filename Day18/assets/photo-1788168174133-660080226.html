@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 300vh;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        display: inline-block;
+      }
+      #black {
+        background-color: black;
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+        z-index: 1;
+      }
+      #red {
+        background-color: red;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        left: 20px;
+      }
+      #blue {
+        background-color: blue;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 3;
+        left: 30px;
+      }
+      #green {
+        display: block;
+        height: 300px;
+
+        background-color: green;
+        overflow: auto;
+        z-index: -1;
+        left: 40px;
+      }
+      #yellow {
+        background-color: yellow;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+      }
+
+      #sticky {
+        position: sticky;
+        top: 0;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="black" class="box">Black Box</div>
+    <div id="red" class="box" style="padding: 0">Red Box</div>
+    <div id="blue" class="box">Blue Box</div>
+    <div id="green" class="box">
+      Green Box Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam
+      natus alias reprehenderit deserunt impedit sunt quis architecto optio
+      ipsum voluptas, autem sed. Dicta harum amet eum alias quos tenetur
+      <span id="sticky">Bibek</span>
+      blanditiis ab distinctio nemo, aut dolorem maxime modi voluptatum, quas
+      totam doloribus iure? Voluptatem explicabo expedita architecto adipisci
+      fuga consequuntur quibusdam illo laboriosam, natus velit nemo esse dicta
+      ea sequi ex sit totam eligendi, sunt perspiciatis, rem ratione officiis
+      eaque assumenda! Molestiae odit asperiores explicabo alias laborum saepe
+      delectus et facere, neque nesciunt fuga non perferendis quae! Atque
+      inventore reprehenderit ea! Voluptas voluptatibus sint consequuntur
+      tempora vero accusantium maiores. Architecto, optio?
+    </div>
+    <div id="yellow" class="box">Yellow Box</div>
+  </body>
+</html>

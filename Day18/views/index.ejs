@@ -1,0 +1,22 @@
+<!Doctype html>
+<html>
+  <head>
+  <title>hello world</title>
+  </head>
+  <body>
+     <%- include('./partials/header', {obj: {name: "apple", server: "django"}  }) %>  
+     <% obj.forEach(e => {%>
+     <p>
+       <% if(e.bool) {%>
+        <%= e.name %>
+        <%} else {%>
+        <%= e.server %>
+        <%} %>
+     </p> 
+     
+     <p><%= e.server %></p>
+     <%})%>
+  
+  </body>
+</html>
+ 

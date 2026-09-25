@@ -1,0 +1,16 @@
+{
+  "name": "rag-express",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env ./server.js",
+    "dev": "node --watch --env-file=.env ./server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.60.0",
+    "@chroma-core/default-embed": "^0.1.9",
+    "@google/genai": "^2.24.0",
+    "chromadb": "^3.5.0",
+    "express": "^4.21.0"
+  }
+}
